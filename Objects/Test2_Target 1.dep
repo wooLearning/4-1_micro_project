@@ -1,0 +1,2 @@
+Dependencies for Project 'Test2', Target 'Target 1': (DO NOT MODIFY !)
+F (.\test1.s)(0x6820D7B9)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 526"-o .\objects\test1.o --depend .\objects\test1.d)

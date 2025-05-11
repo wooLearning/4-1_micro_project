@@ -1,0 +1,4 @@
+--cpu ARM7TDMI
+".\objects\test1.o"
+--library_type=microlib --strict --scatter ".\Objects\Test2.sct"
+--summary_stderr --info summarysizes -o .\Objects\Test2.axf
