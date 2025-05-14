@@ -14,7 +14,7 @@ RCOUNT	LDRB r2, [r0], #1
 		
 		;#2
 		LDR  r0, VALUE1;read address
-		LDR	 r1, VALUE1;write address
+		LDR	 r1, VALUE2;write address
 		LDR r4, MAX
 		
 INV_IM  LDRB r2, [r0], #1
@@ -36,13 +36,13 @@ INV_IM  LDRB r2, [r0], #1
 		BNE  INV_IM
 		
 		;#3
-GRAY	LDR  r0, VALUE1;read address
-		LDR	 r1, VALUE1;write address
+		LDR  r0, VALUE1;read address
+		LDR	 r1, VALUE2;write address
 		LDR  r4, MAX
 		;r8 IS SUM
 		;LDR r8, #0
 		;rgb =>r5 r6 r7
-		LDRB r5, [r0], #1
+GRAY	LDRB r5, [r0], #1
 		LDRB r6, [r0], #1
 		LDRB r7, [r0], #1
 		ADD  r4, r4, #1
@@ -73,21 +73,21 @@ GRAY	LDR  r0, VALUE1;read address
 		LDR	r1, ZERO ;sum
 		LDR r3, ZERO
 		LDR r4, MAX;;until 9600 pixel
-RCOUNT	LDR r2, [r0], #4   
-SHIFT	LSL r5, r2, r3
+RCOUNT2	LDR r2, [r0], #4   
+SHIFT2	LSL r5, r2, r3
 		ADD r3, r3, #8
 		CMP	 r2, #128
 		ADDGE r1, r1, #1  
 		CMP  r3, #32
-		BNE  SHIFT
+		BNE  SHIFT2
 		SUBS r4, r4, #1
-		BNE RCOUNT
+		BNE RCOUNT2
 		
 		;#2
 		LDR  r0, VALUE1;read address
 		LDR	 r1, VALUE1;write address
 		LDR  r4, MAX
-INV_IM  LDRB r2, [r0], #1
+INV_IM2  LDRB r2, [r0], #1
 		RSB  r2, r2, #255 ; r2 = 255 - r2
 		STRB r2, [r1], #1
 		
@@ -103,10 +103,10 @@ INV_IM  LDRB r2, [r0], #1
 		ADD  r0, r0, #1
 		
 		SUBS r4, r4, #1
-		BNE  INV_IM
+		BNE  INV_IM2
 		
 		;#3
-GRAY	LDR  r0, VALUE1;read address
+GRAY2	LDR  r0, VALUE1;read address
 		LDR	 r1, VALUE1;write address
 		LDR  r4, MAX
 		;r8 IS SUM
@@ -131,9 +131,10 @@ GRAY	LDR  r0, VALUE1;read address
 		;half byte store
 		STRH r8, [r1], #2;
 		SUBS r4, r4, #1
-		BNE GRAY		
+		BNE GRAY2		
 		
-VALUE1  DCD &40000000
-MAX		DCD 10 ;; originally 9600 but for debugging
+VALUE1  DCD &40000036
+VALUE2 	DCD &50000000
+MAX		DCD 9600 ;; originally 9600 but for debugging
 ZERO	DCD 0
         END
